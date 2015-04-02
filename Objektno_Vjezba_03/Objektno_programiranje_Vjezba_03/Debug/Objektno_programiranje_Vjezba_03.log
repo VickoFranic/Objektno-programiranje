@@ -1,14 +1,16 @@
-﻿Build started 2.4.2015. 12:59:55.
+﻿Build started 2.4.2015. 15:25:48.
      1>Project "C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Objektno_programiranje_Vjezba_03\Objektno_programiranje_Vjezba_03.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt drugi.cpp
-         drugi.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt treci.cpp
+         treci.cpp
+     1>c:\users\rv\documents\objektno_vjezba_03\objektno-programiranje\objektno_vjezba_03\objektno_programiranje_vjezba_03\treci.cpp(46): warning C4101: 'tmp' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Debug\Objektno_programiranje_Vjezba_03.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Debug\Objektno_programiranje_Vjezba_03.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Debug\Objektno_programiranje_Vjezba_03.lib" /MACHINE:X86 Debug\drugi.obj
          Debug\prvi.obj
+         Debug\treci.obj
          Objektno_programiranje_Vjezba_03.vcxproj -> C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Debug\Objektno_programiranje_Vjezba_03.exe
      1>Done Building Project "C:\Users\RV\Documents\Objektno_Vjezba_03\Objektno-programiranje\Objektno_Vjezba_03\Objektno_programiranje_Vjezba_03\Objektno_programiranje_Vjezba_03.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.96
+Time Elapsed 00:00:01.33

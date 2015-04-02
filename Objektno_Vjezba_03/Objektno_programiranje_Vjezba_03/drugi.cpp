@@ -15,7 +15,7 @@ void print(vector<int> v) {
 	cout << "\n";
 }
 
-int main() {
+int main2() {
 
 	vector<int> sum;
 	vector<int> v = { 2, 4, 10, 2, 4, 1, 2, 1};
