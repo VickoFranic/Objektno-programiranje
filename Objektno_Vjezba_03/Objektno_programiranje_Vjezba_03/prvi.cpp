@@ -52,7 +52,7 @@ string pig_latin(string rec) {
 	return tmp;
 }
 
-int main() {
+int main1() {
 
 	vector<string> v;
 	string recenica;

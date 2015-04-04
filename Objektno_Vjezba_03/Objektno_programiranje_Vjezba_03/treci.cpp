@@ -22,28 +22,25 @@ void stuffing_bit(vector<int>& v) {
 					cnt = 0;
 					break;
 				}
-				else if (cnt > 5) {
-					v.insert((v.begin()+iter_cnt), 0);
-					iter = v.begin();
-					iter = (iter + iter_cnt);
+				else if (cnt == 5) {
+					v.insert((iter), 0);
+					iter = v.begin() + iter_cnt;
 				}
 			}
 		}
-		else if (!((*iter == 0) || (*iter == 1))) {
-				break;
-		} 
 		else {
 			iter++;
 			iter_cnt++;
 		}
 	}
-	print(v);
 }
 
-int main3() {
+int main() {
 	
 	vector<int> v = { 0,0,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1 };
 	int tmp;
+
+	print(v);
 	/*
 	while (true) {
 		cin >> tmp;
@@ -54,6 +51,8 @@ int main3() {
 			v.push_back(tmp);
 	}
 	*/
-	stuffing_bit(v);
+ 	stuffing_bit(v);
+	print(v);
+
 	return 0;
 }
