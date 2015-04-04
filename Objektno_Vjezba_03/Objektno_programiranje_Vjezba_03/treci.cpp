@@ -40,7 +40,7 @@ void stuffing_bit(vector<int>& v) {
 	print(v);
 }
 
-int main() {
+int main3() {
 	
 	vector<int> v = { 0,0,1,1,1,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,0,0,1 };
 	int tmp;
@@ -55,4 +55,5 @@ int main() {
 	}
 	*/
 	stuffing_bit(v);
+	return 0;
 }

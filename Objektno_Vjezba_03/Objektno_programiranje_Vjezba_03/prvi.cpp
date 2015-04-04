@@ -11,62 +11,78 @@ bool test_letter(char s) {
 }
 
 // PREVEDI NA PIG LATIN
-void pig_latin(vector<string*> v, int poz) {
-	string tmp;
-	int i = 0;
-	vector<string*>::iterator it = v.begin() + poz;
-	char c;
-	tmp = **it;
+string pig_latin(string rec) {
+	string tmp, sub;
+	size_t pos_begin = 0;
+	size_t pos_end = rec.find(' ', pos_begin + 1);
+	int cnt = 0;
+	int index = 0;
 
-	for (i; i < (tmp.size()); i++) {
-		c = tmp.at(i);
-		if ((tmp.at(i) == ' ') && test_letter(tmp.at(i + 1))) { // znak je razmak i sljedeci je samoglasnik
-			cout << ' ';
-			i++;
-			while (tmp.at(i) != ' ') {
-				cout << tmp.at(i);
-				i++;
-				if (tmp.at(i) == ' ')
-					cout << "hay ";
-			}
-		}
-		else
-			cout << tmp.at(i);
-	}
-	cout << endl;
+
+	if (test_letter(rec.at(pos_begin)))
+		tmp.append(rec.substr(pos_begin, (pos_end - pos_begin)) + "hay ");
+	else if (!test_letter(rec.at(pos_begin))) {
+		sub = rec.substr((pos_begin), (pos_end - pos_begin));
+	while (!test_letter(sub.at(cnt)))
+		cnt++;
+	tmp.append(sub.substr(cnt, (sub.length() - cnt)));
+	tmp.append(sub.substr(0, cnt) + "ay ");
+	cnt = 0;
 }
 
-int main1() {
+	while (index != rec.npos) {
 
 
-	vector<string*> v;
-	string recenica[256];
+
+		pos_begin = rec.find(' ', index);
+		pos_end = rec.find(' ', pos_begin + 1);
+		index = pos_end;
+
+		if (test_letter(rec.at(pos_begin + 1)))
+			tmp.append(rec.substr(pos_begin, (pos_end - pos_begin)) + "hay ");
+		
+		else if (!test_letter(rec.at(pos_begin + 1))) {
+			sub = rec.substr((pos_begin + 1), (pos_end - pos_begin) - 1);
+			while (!test_letter(sub.at(cnt)))
+				cnt++;
+			tmp.append(sub.substr(cnt, (sub.length() - cnt)));
+			tmp.append(sub.substr(0, cnt) + "ay ");
+			cnt = 0;
+			}
+		}
+	
+	return tmp;
+}
+
+int main() {
+
+	vector<string> v;
+	string recenica;
 	int n = 0;
 
 	cout << "Unesite 'kraj' za izlaz" << endl;
-	while (getline(cin, recenica[n])) {
-		if (recenica[n] == "kraj") {
-			v.push_back(&recenica[n]);
-			break;
-		}
-		v.push_back(&recenica[n]);	
-		n++;
+	while (getline(cin, recenica)) {
+	if (recenica == "kraj") {
+	break;
+	}
+	v.push_back(recenica);
+	n++;
 	}
 
 	// PRINT VECTOR
-	vector<string*>::iterator it = v.begin();
-	int cnt = 1;
-	cout << endl << "RECENICE" << endl;
-	while (it != v.end()){
-		cout << cnt << " " << **it << endl;
-		cnt++;
-		++it;
+	vector<string>::iterator it = v.begin();
+	int cnt = 0;
+
+	while (it != v.end()) {
+	cnt++;
+	++it;
 	}
-	cout << endl << "Upisite redni broj recenice koju zelite prevesti: ";
-	cin >> cnt;
 
-	cnt = cnt--;
-	pig_latin(v, cnt);
+	int r = rand() % cnt;
+	
+	
+	recenica = pig_latin(v.at(r));
 
+	cout << endl << "Random prevedena recenica: " << recenica << endl;
 	return 0;
 }
