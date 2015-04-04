@@ -32,8 +32,6 @@ string pig_latin(string rec) {
 
 	while (index != rec.npos) {
 
-
-
 		pos_begin = rec.find(' ', index);
 		pos_end = rec.find(' ', pos_begin + 1);
 		index = pos_end;
