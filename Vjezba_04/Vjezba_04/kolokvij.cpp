@@ -6,7 +6,7 @@ void cKolokvij::unos_bodova() {
 		std::cin >> this->bodovi[i];
 }
 
-void cKolokvij::print() {
+void cKolokvij::print_bodove() {
 	for (int i = 0; i < 5; i++)
 		std::cout << this->bodovi[i] << " ";
 

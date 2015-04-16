@@ -6,10 +6,10 @@
 /*********************************KOLOKVIJ***********************/
 class cKolokvij {
 private:
-	unsigned int bodovi[5]; // bodovi za 5 zadataka kolokvija
+	 float bodovi[5]; // bodovi za 5 zadataka kolokvija
 public:
 	void unos_bodova();
-	void print();
+	void print_bodove();
 };
 
 
@@ -29,16 +29,21 @@ public:
 	void set_kol();
 	void set_apk();
 
+	void get_pr();
+	void get_apk();
 	void get_all();
 };
 
 
 /*********************************PRACENJE***********************/
 class cPracenjeOOPLab {
-	cStudent s_tmp;
-
+private:
+	int st_num;
+	cStudent *studenti[100];
 public:
-	void get_student(cStudent);
-	void set_student(cStudent);
+	void set_new();
+	void add_new(std::string I, std::string P);
+	void print_student_data(int mb);
+	cStudent* get_student(int mb);
 };
 #endif
