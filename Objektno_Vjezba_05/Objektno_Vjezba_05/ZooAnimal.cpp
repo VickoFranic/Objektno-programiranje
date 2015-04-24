@@ -4,6 +4,8 @@
 
 
 ZooAnimal::ZooAnimal(std::string v, std::string i, int gr, int bk, int bo, int zv) {
+	std::cout << "Konstruktor pozvan" << std::endl;
+
 	this->vrsta = v;
 	this->ime = i;
 	this->godRod = gr;
@@ -12,40 +14,42 @@ ZooAnimal::ZooAnimal(std::string v, std::string i, int gr, int bk, int bo, int z
 	this->zivotniVijek = zv;
 
 	this->Mass = new MassData[this->zivotniVijek * 2]; // alokacija memorije za podatke o masi, zv*2
-	this->Mass->size = 0; // kod kreiranja objekta, nema ni jedan podatak o masi i godini vaganja u njemu
+	this->size = 0; // kod kreiranja objekta, nema ni jedan podatak o masi i godini vaganja u njemu
 }
 
 ZooAnimal::~ZooAnimal() {
+	std::cout << "Destruktor pozvan" << std::endl;
 	delete[] this->Mass; // brisemo ono sto smo dinamicki alocirali
 }
 
 ZooAnimal::ZooAnimal(const ZooAnimal& z) {
+	std::cout << std::endl << "Copy konstruktor pozvan" << std::endl;
+
 	this->vrsta = z.vrsta;
 	this->ime = z.ime;
 	this->godRod = z.godRod;
 	this->brojKaveza = z.brojKaveza;
 	this->brojObroka = z.brojObroka;
 	this->zivotniVijek = z.zivotniVijek;
+	this->size = z.size;
 
 	this->Mass = new MassData[this->zivotniVijek * 2]; // alociramo memoriju
+	std::cout << "Alocirano memorije za podatke o masi: " << (this->zivotniVijek*2)*sizeof(MassData) << std::endl;
 
-	if (z.Mass->size == 0)
-		return;
-	else
-		memcpy(this->Mass, z.Mass, z.Mass->size*(sizeof(z.Mass)));
+//	if (z.size == 0)
+//		memcpy(this->Mass, z.Mass, sizeof(MassData));
+
+	 if (z.size != 0) {
+		memcpy(this->Mass, z.Mass, z.size*(sizeof(MassData))); // deep copy podataka o masi u this iz z
+		std::cout << "Kopirano bajtova podataka o masi: " << z.size*(sizeof(MassData)) << std::endl;
+	}
 }
 
-void ZooAnimal::promjenaObroka() {
-	int tmp;
-	std::cout << "Unesite 1 za poveæanje broja obroka, -1 za smanjenje broja obroka: " << std::endl;
-	std::cin >> tmp;
-
+void ZooAnimal::promjenaObroka(int tmp) {
 	if (tmp == 1)
 		this->brojObroka++;
-	else if (tmp == -1)
+	if (tmp == -1)
 		this->brojObroka--;
-	else
-		this->promjenaObroka();
 }
 
 void ZooAnimal::dodajMasu(int m, int gv) {
@@ -56,6 +60,14 @@ void ZooAnimal::dodajMasu(int m, int gv) {
 	int YEAR = timePointer->tm_year + 1900; // tekuca godina
 
 	while (cnt < this->zivotniVijek * 2) {
+
+		if (this->size == 0) {
+			this->Mass[this->size].godVaganja = gv;
+			this->Mass[this->size].masa = m;
+			this->size++;
+			break;
+		}
+
 		if ((this->Mass[cnt].godVaganja == gv) && (this->Mass[cnt].godVaganja != YEAR)) // godina se vec nalazi u podacima i godina nije tekuca
 			std::cout << "Podaci veæ postoje !" << std::endl;
 
@@ -63,15 +75,17 @@ void ZooAnimal::dodajMasu(int m, int gv) {
 			this->Mass[cnt].masa = m;
 
 		else if ((this->Mass[cnt].godVaganja != gv) && (cnt == (this->zivotniVijek * 2) - 1)) { // godina se ne nalazi u podacima
-			this->Mass[this->Mass->size].godVaganja = gv;
-			this->Mass[this->Mass->size].masa = m;
-			this->Mass->size++;
+			this->Mass[this->size].godVaganja = gv;
+			this->Mass[this->size].masa = m;
+			this->size++;
 		}
 		cnt++;
 	}
 }
 
-void ZooAnimal::provjeriMasu() const {
+void ZooAnimal::provjeriMasu() {
+	std::cout << std::endl;
+
 	int cnt = 0;
 	int mCurr = 0, mPast = 0, diff;
 
@@ -93,16 +107,20 @@ void ZooAnimal::provjeriMasu() const {
 	if ((mCurr == 0) || (mPast == 0))
 		std::cout << "Nedostaju podaci !" << std::endl;
 	else {
-		if ((mCurr > mPast) && (mCurr*0.1 < diff))
-			std::cout << "Zivotinja se udebljala vise od 10% u odnosu na proslu godinu" << std::endl;
+		if ((mCurr > mPast) && (mCurr*0.1 < diff)) {
+			std::cout << "Zivotinja se udebljala vise od 10% u odnosu na proslu godinu, smanjujem obroke" << std::endl;
+			this->promjenaObroka(-1);
+		}
 
-		if ((mCurr < mPast) && (mPast*0.1 < diff))
-			std::cout << "Zivotinja je smrsavila vise od 10% u odnosu na proslu godinu" << std::endl;
+		if ((mCurr < mPast) && (mPast*0.1 < diff)) {
+			std::cout << "Zivotinja je smrsavila vise od 10% u odnosu na proslu godinu, povecavam obroke" << std::endl;
+			this->promjenaObroka(1);
+		}
 	}
 }
 
 void ZooAnimal::ispisPodataka() const {
-	std::cout << "Vrsta: " << this->vrsta << std::endl;
+	std::cout << std::endl << "Vrsta: " << this->vrsta << std::endl;
 	std::cout << "Ime: " << this->ime << std::endl;
 	std::cout << "Godina rodjenja: " << this->godRod << std::endl;
 	std::cout << "Broj kaveza: " << this->brojKaveza << std::endl;
@@ -110,8 +128,8 @@ void ZooAnimal::ispisPodataka() const {
 	std::cout << "Zivotni vijek: " << this->zivotniVijek << std::endl;
 
 	int i = 0;
-	while (i < this->Mass->size) {
-		std::cout << "Godina vaganja: " << Mass[i].godVaganja << "	Masa: " << Mass[i].masa << std::endl;
+	while (i < this->size) {
+		std::cout << "Godina vaganja: " << this->Mass[i].godVaganja << "	Masa: " << this->Mass[i].masa << std::endl;
 		i++;
 	}
 }

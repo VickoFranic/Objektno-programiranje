@@ -3,7 +3,6 @@
 #include <string>
 
 typedef struct MassData {
-	int size; // popunjenost podataka o masi i godini vaganja
 	int masa;
 	int godVaganja;
 } MassData;
@@ -18,15 +17,16 @@ private:
 	int brojObroka;
 	int zivotniVijek;
 	MassData* Mass; // struktura s podacima o masi i godini vaganja
+	int size; // popunjenost podataka o masi i godini vaganja
 
 public:
 	ZooAnimal(std::string v, std::string i, int gr, int bk, int bo, int zv); // alocirat memoriju za masu u konstruktoru
 	~ZooAnimal();
 	ZooAnimal(const ZooAnimal& z);
 
-	void promjenaObroka();
+	void promjenaObroka(int tmp);
 	void dodajMasu(int m, int gv);
-	void provjeriMasu() const;
+	void provjeriMasu();
 	void ispisPodataka() const;
 };
 #endif
