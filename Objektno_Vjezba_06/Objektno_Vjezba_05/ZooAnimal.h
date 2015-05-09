@@ -10,7 +10,8 @@ typedef struct MassData {
 class ZooAnimal {
 
 private:
-	static int counter;
+	static int counter;	// staticka varijabla
+
 	std::string vrsta;
 	std::string ime;
 	int godRod;
@@ -28,6 +29,14 @@ public:
 	ZooAnimal(std::string v, std::string i, int gr, int bk, int bo, int zv); // alocirat memoriju za masu u konstruktoru
 	~ZooAnimal();
 	ZooAnimal(const ZooAnimal& z);
+
+	bool operator==(const ZooAnimal& r) const;
+	ZooAnimal& operator=(const ZooAnimal& r);
+	ZooAnimal& operator++();	// PREFIKSNI OPERATOR
+	ZooAnimal operator--();	// POSTFIKSNI OPERATOR
+
+	ZooAnimal operator++(int);	// PREFIKSNI OPERATOR
+	ZooAnimal operator--(int);	// POSTFIKSNI OPERATOR
 
 	void promjenaObroka(int tmp);
 	void dodajMasu(int m, int gv);

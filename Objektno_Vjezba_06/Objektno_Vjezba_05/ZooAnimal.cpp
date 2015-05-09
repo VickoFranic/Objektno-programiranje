@@ -1,4 +1,4 @@
-#include "ZooAnimal.h"
+﻿#include "ZooAnimal.h"
 #include <iostream>
 #include <ctime>
 #include <vector>
@@ -7,6 +7,63 @@ int ZooAnimal::counter = 0;
 
 void get_counter() {
 	std::cout << std::endl << "Broj objekata: " << ZooAnimal::counter << std::endl;
+}
+
+// • operator==, dvije zivotinje su jednake ako imaju isto ime i vrstu
+bool ZooAnimal::operator==(const ZooAnimal& r) const {
+	if((this->ime == r.ime) && (this->vrsta == r.vrsta))
+		return true;
+	else
+		return false;
+}
+
+// operator =
+ZooAnimal& ZooAnimal::operator=(const ZooAnimal& r) {
+	
+	this->vrsta = r.vrsta;
+	this->ime = r.ime;
+	this->godRod = r.godRod;
+	this->brojKaveza = r.brojKaveza;
+	this->brojObroka = r.brojObroka;
+	this->zivotniVijek = r.zivotniVijek;
+	this->size = r.size;
+
+	delete[] this->Mass; // pobrisemo niz podataka u this objektu
+
+	this->Mass = new MassData[this->zivotniVijek * 2]; // alociramo memoriju
+	// std::cout << "Alocirano memorije za podatke o masi: " << (this->zivotniVijek*2)*sizeof(MassData) << std::endl;
+
+	 if (r.size != 0) {
+		memcpy(this->Mass, r.Mass, r.size*(sizeof(MassData))); // deep copy podataka o masi u this iz z
+	//	std::cout << "Kopirano bajtova podataka o masi: " << z.size*(sizeof(MassData)) << std::endl;
+	}
+
+	 return *this;
+}
+
+// ++, koji uvecava broj porcija za 1 (prefiksni)
+ZooAnimal& ZooAnimal::operator++() {
+	this->promjenaObroka(1);
+	return *this;
+}
+
+// --, koji smanjuje broj porcija za 1 (prefiksni)
+ZooAnimal ZooAnimal::operator--() {
+	this->promjenaObroka(-1);
+	return *this;
+}
+
+ZooAnimal ZooAnimal::operator++(int) {
+	ZooAnimal tmp(*this);
+	tmp.promjenaObroka(1);
+		return tmp;
+}
+
+// --, koji smanjuje broj porcija za 1 (postfiksni)
+ZooAnimal ZooAnimal::operator--(int) {
+	ZooAnimal tmp(*this);
+	tmp.promjenaObroka(-1);
+		return tmp;
 }
 
 void ZooAnimal::counter_change(int v) {
@@ -39,7 +96,7 @@ ZooAnimal::~ZooAnimal() {
 }
 
 ZooAnimal::ZooAnimal(const ZooAnimal& z) {
-	std::cout << std::endl << "Copy konstruktor pozvan";
+	std::cout << std::endl << "Copy konstruktor pozvan" << std::endl;
 
 	this->counter_change(1);	// uvecavamo counter za jedan prilikom dodavanja u vektor, tj. kad se poziva copy konstruktor
 
@@ -84,7 +141,7 @@ void ZooAnimal::dodajMasu(int m, int gv) {
 		}
 
 		if ((this->Mass[cnt].godVaganja == gv) && (this->Mass[cnt].godVaganja != YEAR)) // godina se vec nalazi u podacima i godina nije tekuca
-			std::cout << "Podaci ve� postoje !" << std::endl;
+			std::cout << "Podaci veæ postoje !" << std::endl;
 
 		else if ((this->Mass[cnt].godVaganja == YEAR) && (gv == YEAR)) // godina tekuca, dodaj samo masu
 			this->Mass[cnt].masa = m;
