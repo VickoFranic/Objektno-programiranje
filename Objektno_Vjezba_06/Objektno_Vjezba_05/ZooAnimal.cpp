@@ -42,7 +42,7 @@ ZooAnimal& ZooAnimal::operator=(const ZooAnimal& r) {
 }
 
 // ++, koji uvecava broj porcija za 1 (prefiksni)
-ZooAnimal& ZooAnimal::operator++() {
+ZooAnimal ZooAnimal::operator++() {
 	this->promjenaObroka(1);
 	return *this;
 }
