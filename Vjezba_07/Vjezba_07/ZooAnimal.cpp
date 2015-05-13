@@ -51,6 +51,18 @@ int ZooAnimal::counter = 0;
 		this->brojObroka = zivotinja.brojObroka;
 	}
 
+	/***** OSNOVNA VIRTUALNA METODA BAZNE KLASE ZA OSTREAM ******/
+	void ZooAnimal::print(std::ostream& os) const {
+		os << "Ime zivotinje: " << this->ime << std::endl;
+		os << "Vrsta zivotinje: " << this->vrsta << std::endl;
+	}
+	
+	std::ostream& operator<<(std::ostream& out, const OSS::ZooAnimal& za) {
+		za.print(out);
+		return out;
+	}
+	
+
 	/*
 	ZooAnimal::ZooAnimal(const ZooAnimal& z) {
 	std::cout << std::endl << "Copy konstruktor pozvan";
@@ -170,5 +182,9 @@ int ZooAnimal::counter = 0;
 
 	std::string ZooAnimal::getVrsta() const {
 		return this->vrsta;
+	}
+
+	int ZooAnimal::Food() const {
+		return this->brojObroka;
 	}
 }

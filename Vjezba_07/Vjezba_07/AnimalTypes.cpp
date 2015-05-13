@@ -8,25 +8,46 @@ namespace OSS {
 		this->kolHrane = kol;
 	}
 
-	Bird::Bird(std::string ime, int vi, int temp, int brObroka) : ZooAnimal(ime, "Ptica", brObroka) {
+	int Mammal::Food() const {
+		return (this->kolHrane * ZooAnimal::Food());
+	}
+
+
+	/********************** PTICE **********************/
+	Bird::Bird(std::string ime, int vi, int temp, int kol, int brObroka) : ZooAnimal(ime, "Ptica", brObroka) {
 		this->razmnozavanje = "Polaganje jaja";
 		this->inkubacija = vi;
-		this->temperatura = temp;
+		this->tempTijela = temp;
+		this->kolHrane = kol;
 	}
 
-	std::ostream& operator<<(std::ostream& os, const Bird& animal) {
-		os << "Ime zivotinje: " << animal.getIme() << std::endl;
-		os << "Vrsta zivotinje: " << animal.getVrsta() << std::endl;
-		os << "Nacin razmnozavanja: " << animal.razmnozavanje << std::endl;
-		os << "Vrijeme inkubacije: " << animal.inkubacija << std::endl;
-		os << "Temperatura tijela: " << animal.temperatura << std::endl;
-
-		return os;
+	void Bird::print(std::ostream& out) const {
+		ZooAnimal::print(out);
+		out << "Nacin razmnozavanja: " << this->razmnozavanje << std::endl;
+		out << "Vrijeme inkubacije: " << this->inkubacija << std::endl;
+		out << "Temperatura tijela: " << this->tempTijela << std::endl;
 	}
 
-	Reptile::Reptile(std::string ime, int ink, int tempOkoline, int brObroka) : ZooAnimal(ime, "Sisavac", brObroka) {
+	int Bird::Food() const {
+		return (this->kolHrane * ZooAnimal::Food());
+	}
+
+	/********************** GMAZOVI **********************/
+	Reptile::Reptile(std::string ime, int ink, int tempOkoline, int kol, int brObroka) : ZooAnimal(ime, "Gmaz", brObroka) {
 		this->razmnozavanje = "Polaganje jaja";
 		this->inkubacija = ink;
 		this->tempOkoline = tempOkoline;
+		this->kolHrane = kol;
+	}
+
+	void Reptile::print(std::ostream& out) const {
+		ZooAnimal::print(out);
+		out << "Nacin razmnozavanja: " << this->razmnozavanje << std::endl;
+		out << "Vrijeme inkubacije: " << this->inkubacija << std::endl;
+		out << "Temperatura tijela: " << this->tempOkoline << std::endl;
+	}
+
+	int Reptile::Food() const {
+		return (this->kolHrane * ZooAnimal::Food());
 	}
 }

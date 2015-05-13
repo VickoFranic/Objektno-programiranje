@@ -24,13 +24,15 @@ namespace OSS {
 
 	public:
 		void counter_change(int);
-
 		friend void get_counter();	// Friend funkcija
+		
+		virtual void print(std::ostream& out) const;
+		friend std::ostream& operator<<(std::ostream& out, const OSS::ZooAnimal& za);
 
 		ZooAnimal(std::string v, std::string i, int gr, int bk, int bo, int zv); // alocirat memoriju za masu u konstruktoru
 		~ZooAnimal();
 		ZooAnimal(const ZooAnimal& z);
-		ZooAnimal(std::string ime, std::string vrsta, int brObr);
+		ZooAnimal(std::string ime, std::string vrsta, int brObr);	// konstruktor koji ce pozivati klase koje nasljede ZooAnimal (Mammal, Bird, Reptile)
 
 		void promjenaObroka(int tmp);
 		void dodajMasu(int m, int gv);
@@ -39,6 +41,7 @@ namespace OSS {
 
 		std::string getIme() const;
 		std::string getVrsta() const;
+		virtual int Food() const;
 	};
 }
 #endif
