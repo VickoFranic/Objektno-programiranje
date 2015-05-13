@@ -33,9 +33,9 @@ public:
 	bool operator==(const ZooAnimal& r) const;
 	ZooAnimal& operator=(const ZooAnimal& r);
 	ZooAnimal& operator++();	// PREFIKSNI OPERATOR
-	ZooAnimal operator--();	// POSTFIKSNI OPERATOR
+	ZooAnimal operator--();	// PREFIKSNI OPERATOR
 
-	ZooAnimal operator++(int);	// PREFIKSNI OPERATOR
+	ZooAnimal operator++(int);	// POSTFIKSNI OPERATOR
 	ZooAnimal operator--(int);	// POSTFIKSNI OPERATOR
 
 	void promjenaObroka(int tmp);
