@@ -32,7 +32,7 @@ public:
 
 	bool operator==(const ZooAnimal& r) const;
 	ZooAnimal& operator=(const ZooAnimal& r);
-	ZooAnimal& operator++();	// PREFIKSNI OPERATOR
+	ZooAnimal operator++();	// PREFIKSNI OPERATOR
 	ZooAnimal operator--();	// PREFIKSNI OPERATOR
 
 	ZooAnimal operator++(int);	// POSTFIKSNI OPERATOR
