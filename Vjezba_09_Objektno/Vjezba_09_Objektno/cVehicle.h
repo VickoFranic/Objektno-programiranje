@@ -13,6 +13,7 @@ namespace OSS {
 		// cisto virtualne funkcije
 		virtual std::string type() = 0;
 		virtual unsigned int passengers() = 0;
+		virtual ~Vehicle() = 0;
 	};
 }
 #endif

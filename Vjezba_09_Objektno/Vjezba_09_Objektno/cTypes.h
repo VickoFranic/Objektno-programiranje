@@ -6,12 +6,12 @@ namespace OSS {
 		std::string type();
 	};
 
-	class Watercraft : public Vehicle {
+	class Watercraft : virtual public Vehicle {
 	public:
 		std::string type();
 	};
 
-	class Aircraft : public Vehicle {
+	class Aircraft : virtual public Vehicle {
 	public:
 		std::string type();
 	};
