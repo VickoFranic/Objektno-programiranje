@@ -8,7 +8,7 @@ bool Odd(int n) {
 	return ((n % 2) == 1);
 }
 
-// veæi od 100
+// veÄ‡i od 100
 bool check(int n) {
 	return n > 100;
 }
@@ -96,15 +96,9 @@ int main() {
 	for (int i = 0; i < v.size(); i++)
 		std::cout << v.at(i) << " ";
 	std::cout << std::endl;
-}
+	}
 
-	catch(NotNumber& err) {
-		err.showError();
-	}
-	catch(NotOperator& err) {
-		err.showError();
-	}
-	catch (ZeroDivide& err) {
+	catch(BaseException& err) {
 		err.showError();
 	}
 	catch (...) {
