@@ -3,16 +3,12 @@
 #include <fstream>
 #include <ctime>
 
-void NotNumber::showError() {
-	std::cout << "Uneseni parametar nije cijeli broj !" << std::endl;
+BaseException::BaseException(std::string s) {
+	this->msg = s;
 }
 
-void NotOperator::showError() {
-	std::cout << "Uneseni parametar nije podrzan operator !" << std::endl;
-}
-
-void ZeroDivide::showError() {
-	std::cout << "Dijeljenje sa nulom !" << std::endl;
+void BaseException::showError() {
+	std::cout << this->msg << std::endl;
 }
 
 int get_num() {
@@ -23,7 +19,7 @@ int get_num() {
 		time_t tmp = time(0);
 		std::ofstream ofs("errors.log", std::ios_base::out | std::ios_base::app);
 		ofs << ctime(&tmp) << "Uneseni parametar nije cijeli broj !" << std::endl;
-		throw NotNumber();
+		throw BaseException("Uneseni parametar nije cijeli broj !");
 	}
 	return n;
 }
@@ -38,7 +34,7 @@ char get_operator() {
 	time_t tmp = time(0);
 	std::ofstream ofs("errors.log", std::ios_base::out | std::ios_base::app);
 	ofs << ctime(&tmp) << "Uneseni parametar nije podrzan operator !" << std::endl;
-	throw NotOperator();
+	throw BaseException("Uneseni parametar nije podrzan operator !");
 }
 
 int result(int x, int y, char o) {
@@ -46,7 +42,7 @@ int result(int x, int y, char o) {
 		time_t tmp = time(0);
 		std::ofstream ofs("errors.log", std::ios_base::out | std::ios_base::app);
 		ofs << ctime(&tmp) << "Dijeljenje s nulom !" << std::endl;
-		throw ZeroDivide();
+		throw BaseException("Dijeljenje s nulom !");
 	}
 
 	if (o == '+') {
