@@ -2,25 +2,14 @@
 #define HEADERS_H
 
 #include <iostream>
+#include <string>
 
 /*********************** IZNIMKE ******************/
 class BaseException {
+private:
+	std::string msg;
 public:
-	virtual void showError() = 0;	// cista virtualna funkcija
-};
-
-class NotNumber : public BaseException {
-public:
-	void showError();
-};
-
-class NotOperator : public BaseException {
-public:
-	void showError();
-};
-
-class ZeroDivide : public BaseException {
-public:
+	BaseException(std::string);
 	void showError();
 };
 
